@@ -39,7 +39,7 @@ public class Deck
    public Card dealCard()
    {
       Card c = deck.remove(0);
-      return c;
+      return new Card(c);
    }
    
    /**
