@@ -16,7 +16,7 @@ public class Deck
    }
    
    /**
-      freshDeck creates a new deck of cards
+      freshDeck creates a new deck of 52 cards
    */
    public void freshDeck()
    {
@@ -32,34 +32,29 @@ public class Deck
       
    }
    
+   /**
+      dealCard will deal the top card from the deck
+      @return a card object
+   */
    public Card dealCard()
    {
       Card c = deck.remove(0);
       return c;
    }
    
-   
+   /**
+      cardsRemaining will return the size of the deck
+      @return the size of the deck
+   */
    public int cardsRemaining()
    {  
       return deck.size();
    }
-   
-   
-   public void shuffle()
-   {
-      int randNum;
-      Card temp;
-      Random r = new Random();
-      for (int i = 0; i < deck.size(); i++)
-      {
-         randNum = r.nextInt(deck.size());
-         temp = deck.get(i);
-         deck.set(i,deck.get(randNum));
-         deck.set(randNum,temp);
-      }      
-   }
-   
-   
+     
+   /**
+      isEmpty will return true if the deck is Empty
+      @return a boolean true or false
+   */
    public boolean isEmpty()
    {
       return (deck.size() == 0);
