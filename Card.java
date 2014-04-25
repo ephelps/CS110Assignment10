@@ -12,10 +12,10 @@ import javax.swing.*;
 public class Card
 {
    //create enumerated data type for suite
-   enum suite {HEARTS, CLUBS, DIAMONDS, SPADES};
+   enum Suite {HEARTS, CLUBS, DIAMONDS, SPADES};
    
    //define enumerated rank constants
-   enum rank {JACK, QUEEN, KING, ACE};
+   enum Rank {JACK, QUEEN, KING, ACE};
    
    //define fields
    private int rank;
