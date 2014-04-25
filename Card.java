@@ -11,15 +11,14 @@ import javax.swing.*;
 
 public class Card
 {
-   //create enumerated data type for suite
-   enum Suite {HEARTS, CLUBS, DIAMONDS, SPADES};
-   
-   //define enumerated rank constants
-   enum Rank {JACK, QUEEN, KING, ACE};
-   
+   //define rank constants
+   public final static int ACE = 1,          
+                            JACK = 11,        
+                            QUEEN = 12,       
+                            KING = 13;   
    //define fields
    private int rank;
-   private int suite;
+   private Suite suite;
    private ImageIcon pic;
    
    /**
@@ -29,7 +28,7 @@ public class Card
       @param cardSuite the suite of the card
    */
    
-   public Card(int suite, int rank)
+   public Card(Suite suite, int rank)
    {
       this.rank = rank;
       this.suite = suite;
@@ -41,7 +40,7 @@ public class Card
       @return the int # of the suite
    */
    
-   public int getSuite()
+   public Suite getSuite()
    {
       return suite;
    }
