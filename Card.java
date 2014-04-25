@@ -13,9 +13,9 @@ public class Card
 {
    //define rank constants
    public final static int ACE = 1,          
-                            JACK = 11,        
-                            QUEEN = 12,       
-                            KING = 13;   
+                           JACK = 11,        
+                           QUEEN = 12,       
+                           KING = 13;   
    //define fields
    private int rank;
    private Suite suite;
