@@ -35,6 +35,18 @@ public class Card
       pic = null;////////////////////////////////////////////////////////////////////////////////////////////////////
    }
    
+   /**
+      copy constructor accepts a card object and recreates it
+      @param a card object
+   */
+   public Card(Card c)
+   {
+      rank = c.getRank();
+      suite = c.getSuite();
+      pic = c.getPic();
+      
+   }
+   
    /** 
       getSuite will return an int of the suite
       @return the int # of the suite
