@@ -11,9 +11,30 @@ public class Stack extends Deck
       of the deck to each players array
       @param d a Deck object
    */
-   public Stack(Deck d)
+   public Stack()
    {
-   
+      super();
+      
+      super.shuffle();
+                  
+      //create both of the stacks
+      stackPlayer1 = new ArrayList<Card>();
+      stackPlayer2 = new ArrayList<Card>();
+      
+      //put 26 cards in the first stack
+      for (int i = 0; i <=25; i++)
+      {
+         Card s = super.dealCard();
+         stackPlayer1.add(new Card(s));
+      }
+      
+      //put 26 cards in the second stack
+      for (int i = 26; i<=51; i++)
+      {
+         Card r = super.dealCard();
+         stackPlayer2.add(new Card(r));
+      }
+            
    }
    
    /**
