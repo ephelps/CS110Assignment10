@@ -98,4 +98,42 @@ public class Card
       
       return status;
    }
+   
+   public String toString()
+   {
+      String suiteString = null;
+      String rankString = null;
+      
+      //change rank to proper string name if need be
+      if (rank<11)
+      {
+         rankString = rank + "";
+      }
+      
+      else if (rank == 11)
+      {
+         rankString = "Jack";
+      }
+      
+      else if (rank == 12)
+      {
+         rankString = "Queen";
+      }
+      
+      else if (rank == 13)
+      {
+         rankString = "King";
+      }
+      
+      else if (rank == 14)
+      {
+         rankString = "Ace";
+      }
+      
+      //make correct string
+      String str = rankString + " of " + suite;
+      
+      //return string
+      return str;
+   }
 }
