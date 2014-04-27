@@ -1,3 +1,4 @@
+
 public class War
 {  
 
@@ -117,45 +118,45 @@ public class War
          //send the face up cards to roundWinner
          int warWinner = roundWinner(c1FaceUp, c2FaceUp);
             
-            if(warWinner == -1)//if player 2 won, player 1's cards should be added to their pile
-            {
-               s.addCardPlayer2(c1);
-               s.addCardPlayer2(c1FaceDown);
-               s.addCardPlayer2(c1FaceUp);
-               s.addCardPlayer2(c2);
-               s.addCardPlayer2(c2FaceDown);
-               s.addCardPlayer2(c1FaceUp);
+         if(warWinner == -1)//if player 2 won, player 1's cards should be added to their pile
+         {
+            s.addCardPlayer2(c1);
+            s.addCardPlayer2(c1FaceDown);
+            s.addCardPlayer2(c1FaceUp);
+            s.addCardPlayer2(c2);
+            s.addCardPlayer2(c2FaceDown);
+            s.addCardPlayer2(c1FaceUp);
 
-               System.out.println(c1FaceUp.toString() + " was less than " + c2FaceUp.toString());
-               System.out.println("The cards "+ c1.toString() + ", " + c1FaceDown.toString() + 
-                                    " and " + c1FaceUp.toString() + " were added to Player 2's stack");
-            }
+            System.out.println(c1FaceUp.toString() + " was less than " + c2FaceUp.toString());
+            System.out.println("The cards "+ c1.toString() + ", " + c1FaceDown.toString() + 
+                                 " and " + c1FaceUp.toString() + " were added to Player 2's stack");
+         }
          
-            if(warWinner == 1)//if player 1 won, player 2's cards should be added to their pile
-            {
-               s.addCardPlayer1(c2);
-               s.addCardPlayer1(c2FaceDown);
-               s.addCardPlayer1(c2FaceUp);
-               s.addCardPlayer1(c1);
-               s.addCardPlayer1(c1FaceDown);
-               s.addCardPlayer1(c1FaceUp);
-               System.out.println(c2FaceUp.toString() + " was less than " + c1FaceUp.toString());
-               System.out.println("The cards "+ c2.toString() + ", " + c2FaceDown.toString() + 
-                                    " and " + c2FaceUp.toString() + " were added to Player 1's stack");
+         if(warWinner == 1)//if player 1 won, player 2's cards should be added to their pile
+         {
+            s.addCardPlayer1(c2);
+            s.addCardPlayer1(c2FaceDown);
+            s.addCardPlayer1(c2FaceUp);
+            s.addCardPlayer1(c1);
+            s.addCardPlayer1(c1FaceDown);
+            s.addCardPlayer1(c1FaceUp);
+            System.out.println(c2FaceUp.toString() + " was less than " + c1FaceUp.toString());
+            System.out.println("The cards "+ c2.toString() + ", " + c2FaceDown.toString() + 
+                                 " and " + c2FaceUp.toString() + " were added to Player 1's stack");
 
-            }
+         }
             
-            cardsPlayer1 = s.cardsRemainingPlayer1();
-            cardsPlayer2 = s.cardsRemainingPlayer2();
+         cardsPlayer1 = s.cardsRemainingPlayer1();
+         cardsPlayer2 = s.cardsRemainingPlayer2();
 
-            if(warWinner == 1111)
-            {
-               System.out.println("An error occurred");
-            }
+         if(warWinner == 1111)
+         {
+            System.out.println("An error occurred");
+         }
          
-            if(cardsPlayer1 <= 1 || cardsPlayer2 <= 1)
-            {
-               cardsPlayer1 = s.cardsRemainingPlayer1();
+         if(cardsPlayer1 <= 1 || cardsPlayer2 <= 1)
+         {
+            cardsPlayer1 = s.cardsRemainingPlayer1();
             cardsPlayer2 = s.cardsRemainingPlayer2();
             System.out.println("Not enough cards to continue war");
             loser(cardsPlayer1, cardsPlayer2);
