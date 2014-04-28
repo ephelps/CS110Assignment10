@@ -1,11 +1,11 @@
 import java.util.Random;
 import java.util.ArrayList;
 
-public class Deck 
+public class Deck implements DeckInterface
 {
-   final int CARDS_IN_DECK = 52;
+   private final int CARDS_IN_DECK = 52;
 
-   ArrayList<Card> deck;
+   private ArrayList<Card> deck;
    
    /**
       constructor creates a new deck by calling freshDeck

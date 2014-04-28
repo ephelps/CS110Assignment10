@@ -9,7 +9,7 @@ two cards are equal if they contain the same rank
 
 import javax.swing.*;
 
-public class Card
+public class Card implements CardInterface
 {
    //define rank constants
    public final static int ACE = 1,          
@@ -24,8 +24,8 @@ public class Card
    /**
       constructor will accept a rank and suite for a card and set them to rank and suite respectively
       will also set a pic to the card accordingly
-      @param cardRank the rank of the card
-      @param cardSuite the suite of the card
+      @param rank the rank of the card
+      @param suite the suite of the card
    */
    
    public Card(Suite suite, int rank)
@@ -37,7 +37,7 @@ public class Card
    
    /**
       copy constructor accepts a card object and recreates it
-      @param a card object
+      @param c a card object
    */
    public Card(Card c)
    {
@@ -49,7 +49,7 @@ public class Card
    
    /** 
       getSuite will return an int of the suite
-      @return the int # of the suite
+      @return the enum object of the suite
    */
    
    public Suite getSuite()
@@ -59,7 +59,7 @@ public class Card
    
    /**
       getRank will return an int of the rank
-      @return the int # of the rank of the card
+      @return the int of the rank of the card
    */
    
    public int getRank()
@@ -99,6 +99,10 @@ public class Card
       return status;
    }
    
+   /**
+      toString will return a string of the card object
+      @return a string of the card object information
+   */
    public String toString()
    {
       String suiteString = null;
