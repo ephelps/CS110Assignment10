@@ -9,12 +9,14 @@ public class WarGUI extends JFrame
 {
    private War game = new War();
    private JPanel title, warButton, player1, player2, winner;
-   private JButton war;
+   private JButton round, war;
    private JLabel titleOfGame, winnerStatus, player1Score, player2Score;
    private ImageIcon player1Card, player2Card;
    
-   private final int WINDOW_WIDTH = 650,
-                     WINDOW_HEIGHT = 300;
+   private final int WINDOW_WIDTH = 750,
+                     WINDOW_HEIGHT = 350;
+                     
+   private ArrayList<Card> cardsDrawn;
    
    public WarGUI()
    {
@@ -37,10 +39,17 @@ public class WarGUI extends JFrame
       titleOfGame = new JLabel("Emily's War Game");
       title.add(titleOfGame);
        
-      //create war button
-      war = new JButton("Play");
+      //create round button
+      round = new JButton("Play");
+      round.addActionListener(new roundButtonListener());
+      warButton.add(round);
+      
+      //create war button            
+      war = new JButton("War");
       war.addActionListener(new warButtonListener());
       warButton.add(war);
+      war.setEnabled(false);
+
       
       //create winner label
       winnerStatus = new JLabel("Press Play to Flip the Cards");
@@ -70,20 +79,19 @@ public class WarGUI extends JFrame
       setVisible(true);
    }
    
-   private class warButtonListener implements ActionListener
+   private class roundButtonListener implements ActionListener
    {
       /**
-         the actionPerformed method executes what happens when the user clicks on the War button
+         the actionPerformed method executes what happens when the user clicks on the round button
          @param e the event object
       */
       
       public void actionPerformed(ActionEvent e)
       {
-         
          if(game.getCardsRemainingPlayer1() != 0 || game.getCardsRemainingPlayer2() != 0)
          {
             //get the two cards drawn
-            ArrayList<Card> cardsDrawn = game.play();
+            cardsDrawn = game.playRound();
             
             //set the pics of those two items
             player1Score.setIcon(game.getC1().getPic());
@@ -122,38 +130,105 @@ public class WarGUI extends JFrame
             if (winner == 0)
             {  
                //say that there was a tie
-               winnerStatus.setText("A tie has occurred");
-
-               //round winner did not do anything
-               //call the war method
-               game.war(cardsDrawn);
-               
-               //set the pictures to the first two new face up cards
-               player1Score.setIcon(game.getC1().getPic());
-               player2Score.setIcon(game.getC2().getPic());
-               
-               //set the new scores for each player
-               player1Score.setText("Cards Remaining: " + game.getCardsRemainingPlayer1());
-               player2Score.setText("Cards Remaining: " + game.getCardsRemainingPlayer2());
+               winnerStatus.setText("A tie has occurred. Press War button to resolve the war."); 
+               round.setEnabled(false);
+               war.setEnabled(true);              
             }
-                        
-            
-            pack();
          }
          
          else
          {                  
-            if (game.getCardsRemainingPlayer1() == 0 )
-            {
-               JOptionPane.showMessageDialog(null, "Player 1 has no cards remaining! Player 2 wins!"); 
-            }
-      
-            if(game.getCardsRemainingPlayer2() == 0)
-            {
-               JOptionPane.showMessageDialog(null, "Player 2 has no cards remaining! Player 1 wins!"); 
-            }
-
+            endOfGame();
          }
+      }
+   }
+   
+   private class warButtonListener implements ActionListener
+   {
+      /**
+         the actionPerformed method executes what happens when the user clicks on the War button
+         @param e the event object
+      */
+      
+      public void actionPerformed(ActionEvent e)
+      {         
+         if(game.getCardsRemainingPlayer1() != 0 || game.getCardsRemainingPlayer2() != 0)
+         {
+            //call the war method, which draws two cards for each person
+            ArrayList<Card> warCards = game.war(cardsDrawn);
+            
+            //set the pics of those two cards face up
+            player1Score.setIcon(game.getC1().getPic());
+            player2Score.setIcon(game.getC2().getPic());
+            
+            //determine who won the war
+            int warWin = game.warWinner(warCards);
+            
+            //if the winner is player 1
+            if(warWin == 1)
+            {
+               //warWinner already added the cards the the deck
+               //so just get the new cards remaining in the stacks
+               player1Score.setText("Cards Remaining: " + game.getCardsRemainingPlayer1());
+               player2Score.setText("Cards Remaining: " + game.getCardsRemainingPlayer2());
+                  
+               //say that player 1 won the round
+               winnerStatus.setText("Player 1 won the round");
+               
+               //war is now over so set the round button to work again and war button to not work
+               round.setEnabled(true);
+               war.setEnabled(false);
+   
+   
+            }
+               
+            //if the winner is player 2
+            if(warWin == 2)
+            {
+               //warWinner already added the cards the the deck
+               //so just get the new cards remaining in the stacks
+               player1Score.setText("Cards Remaining: " + game.getCardsRemainingPlayer1());
+               player2Score.setText("Cards Remaining: " + game.getCardsRemainingPlayer2());
+                  
+               //say that player 2 won the round
+               winnerStatus.setText("Player 2 won the round");
+               
+               //war is now over so set the round button to work again and war button to not work
+               round.setEnabled(true);
+               war.setEnabled(false);
+   
+            }
+   
+            //if there was another tie          
+            if (warWin == 0)
+            {  
+               //say that there was a tie
+               winnerStatus.setText("A tie has occurred. Press War button to resolve the war."); 
+            }
+         }
+         
+         else
+         {                  
+            endOfGame();
+         }
+
+
+
+      }
+   }
+   /**
+      endOfGame will create a JOptionPane that tells you who won the game
+   */
+   private void endOfGame()
+   {
+      if (game.getCardsRemainingPlayer1() == 0 )
+      {
+         JOptionPane.showMessageDialog(null, "Player 1 has no cards remaining! Player 2 wins!"); 
+      }
+      
+      if(game.getCardsRemainingPlayer2() == 0)
+      {
+         JOptionPane.showMessageDialog(null, "Player 2 has no cards remaining! Player 1 wins!"); 
       }
    }
    
