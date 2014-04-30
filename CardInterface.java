@@ -5,7 +5,5 @@ public interface CardInterface
    public Suite getSuite();
    public int getRank();
    public ImageIcon getPic();
-   public boolean equals(Card card2);
-   public String toString();
-   
+   public boolean equals(Card card2);   
 }
