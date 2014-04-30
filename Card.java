@@ -32,7 +32,52 @@ public class Card implements CardInterface
    {
       this.rank = rank;
       this.suite = suite;
-      pic = null;////////////////////////////////////////////////////////////////////////////////////////////////////
+      
+      //make strings so you can assign a pic
+      String rankString = null;
+      String suiteString = null;
+      String thepic;
+      
+      //get the correct rank on the card name
+      if (rank < 11 && rank > 1)
+      {
+         rankString = rank+"";
+      }
+      
+      else if (rank == 11)
+      {
+         rankString = "jack";
+      }
+      
+      else if (rank == 12)
+      {
+         rankString = "queen";
+      }
+      
+      else if (rank == 13)
+      {
+         rankString = "king";
+      }
+      
+      else if (rank == 1)
+      {
+         rankString = "ace";
+      }
+      
+      //get correct suite format for card name
+      if(suite == suite.HEARTS)
+         suiteString = "h";
+      else if(suite == suite.DIAMONDS)
+         suiteString = "d";
+      else if(suite == suite.SPADES)
+         suiteString = "s";
+      else if(suite == suite.CLUBS)
+         suiteString = "c";
+      
+      thepic = rankString + suiteString + ".jpg";
+      
+      pic = new ImageIcon(thepic);
+
    }
    
    /**
@@ -97,47 +142,5 @@ public class Card implements CardInterface
       }
       
       return status;
-   }
-   
-   /**
-      toString will return a string of the card object
-      @return a string of the card object information
-   */
-   public String toString()
-   {
-      String suiteString = null;
-      String rankString = null;
-      
-      //change rank to proper string name if need be
-      if (rank<11)
-      {
-         rankString = rank + "";
-      }
-      
-      else if (rank == 11)
-      {
-         rankString = "Jack";
-      }
-      
-      else if (rank == 12)
-      {
-         rankString = "Queen";
-      }
-      
-      else if (rank == 13)
-      {
-         rankString = "King";
-      }
-      
-      else if (rank == 14)
-      {
-         rankString = "Ace";
-      }
-      
-      //make correct string
-      String str = rankString + " of " + suite;
-      
-      //return string
-      return str;
    }
 }
