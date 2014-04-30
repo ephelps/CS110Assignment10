@@ -22,7 +22,7 @@ public class War
       adds the cards to an array 
       @return the array
    */
-   public ArrayList<Card> play()
+   public ArrayList<Card> playRound()
    {
       Card c1 = s.dealCardPlayer1();
       Card c2 = s.dealCardPlayer2();
@@ -86,56 +86,63 @@ public class War
    /**
       war will play a war for the game
       @param warCards an array of Cards
+      @return an int of who won the war
    */
    
-   public void war(ArrayList<Card> warCards)
+   public ArrayList<Card> war(ArrayList<Card> warCards)
    {  
-      int warWinner = 0;
+      //draw one card from each person
+      Card c1FaceDown = s.dealCardPlayer1();
+      Card c2FaceDown = s.dealCardPlayer2();
+         
+      //add cards to array
+      warCards.add(c2FaceDown);
+      warCards.add(c1FaceDown);
+         
+      //check to see that there are not 0 cards left in either persons deck
+      loser();
+         
+      //draw the second card on each pile            
+      Card c1FaceUp = s.dealCardPlayer1();
+      Card c2FaceUp = s.dealCardPlayer2();
+         
+      //add cards to array
+      warCards.add(c2FaceUp);
+      warCards.add(c1FaceUp);
       
-      while (warWinner == 0)
-      {    
-         //draw one card from each person
-         Card c1FaceDown = s.dealCardPlayer1();
-         Card c2FaceDown = s.dealCardPlayer2();
-         
-         //add cards to array
-         warCards.add(c2FaceDown);
-         warCards.add(c1FaceDown);
-         
-         //check to see that there are not 0 cards left in either persons deck
-         loser();
-         
-         //draw the second card on each pile            
-         Card c1FaceUp = s.dealCardPlayer1();
-         Card c2FaceUp = s.dealCardPlayer2();
-         
-         //add cards to array
-         warCards.add(c2FaceUp);
-         warCards.add(c1FaceUp);
-                                 
-         //send the cards to roundWinner
-         warWinner = roundWinner(warCards);         
-      }
-         
-      if(warWinner == -1)//if player 2 won, player 1's cards should be added to their pile
-      {
-         for(int i = 0; i <= warCards.size(); i++)
-         {
-            Card c = warCards.get(0);
-            s.addCardPlayer2(c);
-         }               
-      }
-            
+      return warCards;            
+   }  
+   
+   /**
+      warWinner returns who won the war
+      
+   */
+   public int warWinner(ArrayList<Card> warCards)
+   {
+      //send the cards to roundWinner
+      int warWinner = roundWinner(warCards);         
+      
       if(warWinner == 1)//if player 1 won, player 2's cards should be added to their pile
       {
          for(int i = 0; i <= warCards.size(); i++)
          {
-            Card c = warCards.get(0);
+            Card c = warCards.remove(0);
             s.addCardPlayer2(c);
          }
       }
-   }  
    
+      if(warWinner == 2)//if player 2 won, player 1's cards should be added to their pile
+      {
+         for(int i = 0; i <= warCards.size(); i++)
+         {
+            Card c = warCards.remove(0);
+            s.addCardPlayer2(c);
+         }               
+      }
+            
+      return warWinner;
+   }
+
    /**
          loser determines if someone lost the game
   */
