@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-
 public class War
 {  
 
    private Stack s;
    private ArrayList<Card> warCards;
-      
+   
    /**
       constructor creates a new stack object and sets
       the cards for each player to the default 26 each
@@ -114,9 +113,26 @@ public class War
          warCards.add(c2FaceUp);
          warCards.add(c1FaceUp);
                                  
-         //send the face up cards to roundWinner
-         warWinner = roundWinner(warCards);
+         //send the cards to roundWinner
+         warWinner = roundWinner(warCards);         
+      }
          
+      if(warWinner == -1)//if player 2 won, player 1's cards should be added to their pile
+      {
+         for(int i = 0; i <= warCards.size(); i++)
+         {
+            Card c = warCards.get(0);
+            s.addCardPlayer2(c);
+         }               
+      }
+            
+      if(warWinner == 1)//if player 1 won, player 2's cards should be added to their pile
+      {
+         for(int i = 0; i <= warCards.size(); i++)
+         {
+            Card c = warCards.get(0);
+            s.addCardPlayer2(c);
+         }
       }
    }  
    
@@ -174,5 +190,5 @@ public class War
    public int getCardsRemainingPlayer2()
    {
       return s.cardsRemainingPlayer2();
-   }
+   }   
 }
