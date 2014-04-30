@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class War
+public class War implements WarInterface
 {  
 
    private Stack s;
@@ -39,6 +39,7 @@ public class War
       if 1 returned player 1 won
       if 0 returned the cards were equal- their should be a war
       @param warCards an array of cards
+      @return an int of the winner
    */
    public int roundWinner(ArrayList<Card> warCards)
    {
@@ -86,7 +87,7 @@ public class War
    /**
       war will play a war for the game
       @param warCards an array of Cards
-      @return an int of who won the war
+      @return an array the cards
    */
    
    public ArrayList<Card> war(ArrayList<Card> warCards)
@@ -115,7 +116,8 @@ public class War
    
    /**
       warWinner returns who won the war
-      
+      @param warCards the cards already drawn
+      @return an int of who won the war
    */
    public int warWinner(ArrayList<Card> warCards)
    {
